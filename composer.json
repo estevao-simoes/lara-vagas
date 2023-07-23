@@ -1,11 +1,11 @@
 {
-    "name": "laravel/laravel",
+    "name": "estevao-simoes/laravagas",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
-    "license": "MIT",
+    "description": "Vagas para desenvolvedores Laravel, feito com <3 por um Brasileiro",
+    "keywords": ["vagas", "laravel", "brasil"],
     "require": {
         "php": "^8.1",
+        "filament/filament": "^2.17",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
