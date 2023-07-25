@@ -1,0 +1,14 @@
+/* CSS HEX
+--prussian-blue: #072939ff;
+--orange-web: #fca311ff;
+--vermilion: #f9322bff;
+--lavender-web: #d6e3f8ff;
+--seashell: #fef5efff; */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+    display: none;
+}
