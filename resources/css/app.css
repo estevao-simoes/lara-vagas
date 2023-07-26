@@ -1,9 +1,4 @@
-/* CSS HEX
---prussian-blue: #072939ff;
---orange-web: #fca311ff;
---vermilion: #f9322bff;
---lavender-web: #d6e3f8ff;
---seashell: #fef5efff; */
+@import '../../vendor/filament/forms/dist/module.esm.css';
 
 @tailwind base;
 @tailwind components;

@@ -15,4 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
+
+// Route::get('{listing:slug}', function (App\Models\Jobs\Listing $listing) {
+//     return view('listing', compact('listing'));
+// })->name('listing.show');
+
+Route::get('post-job', function () {
+    return view('post-job');
+})->name('post-job.view');
