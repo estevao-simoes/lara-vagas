@@ -69,4 +69,13 @@ trait HasTags
         return collect(self::TAGS);
     }
 
+    static function getTagsAsArray(): array
+    {
+        return self::getTags()->toArray();
+    }
+
+    static function getTag($index): string
+    {
+        return self::TAGS[$index];
+    }
 }

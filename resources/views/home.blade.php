@@ -3,8 +3,10 @@
         <x-site.hero />
     </x-site.nav>
     <main class="mt-16 container mx-auto px-3">
-        @foreach ($i = [1, 2, 3, 4, 5, 6, 7, 10] as $number)
-            <x-site.card :loop="$loop" />
+        @foreach ($listings as $job)
+        <a href="{{ route('post-job.click', $job->id) }}" target="_blank">
+            <x-site.card :loop="$loop" :job="$job" />
+        </a>
         @endforeach
     </main>
     <x-site.footer />

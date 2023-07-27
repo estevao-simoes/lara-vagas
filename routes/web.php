@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\GoToListingWebsiteController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', HomeController::class)->name('home');
 
 // Route::get('{listing:slug}', function (App\Models\Jobs\Listing $listing) {
 //     return view('listing', compact('listing'));
@@ -24,3 +24,5 @@ Route::get('/', function () {
 Route::get('post-job', function () {
     return view('post-job');
 })->name('post-job.view');
+
+Route::get('listing/{listing}', GoToListingWebsiteController::class)->name('post-job.click');

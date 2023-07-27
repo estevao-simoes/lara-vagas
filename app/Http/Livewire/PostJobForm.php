@@ -12,14 +12,26 @@ class PostJobForm extends Component implements Forms\Contracts\HasForms
 {
     use Forms\Concerns\InteractsWithForms;
 
-    public $title;
-    public $content;
+    public $title = '';
+    public $location = '';
+    public $contract_type = '';
+    public $url = '';
+    public $company_name = '';
+    public $salary = '';
+    public $tags = '';
+    public $company_logo = '';
 
     public function mount(): void
     {
         $this->form->fill([
-            'title' => '',
-            'content' => '',
+            'title' => $this->title,
+            'location' => $this->location,
+            'contract_type' => $this->contract_type,
+            'url' => $this->url,
+            'company_name' => $this->company_name,
+            'salary' => $this->salary,
+            'tags' => $this->tags,
+            'company_logo' => $this->company_logo,
         ]);
     }
 
@@ -28,12 +40,15 @@ class PostJobForm extends Component implements Forms\Contracts\HasForms
         return [
             Forms\Components\TextInput::make('title')
                 ->label('Título do cargo')
+                ->reactive()
                 ->required(),
-            Forms\Components\TextInput::make('locale')
+            Forms\Components\TextInput::make('location')
+                ->reactive()
                 ->label('Local')
                 ->helperText('Ex.: São Paulo, SP, Remoto, Híbrido')
                 ->required(),
             Forms\Components\Select::make('contract_type')
+                ->reactive()
                 ->label('Tipo de contrato')
                 ->options([
                     'FULL_TIME' => 'Tempo integral',
@@ -47,34 +62,44 @@ class PostJobForm extends Component implements Forms\Contracts\HasForms
                 ])
                 ->required(),
             Forms\Components\TextInput::make('url')
+                ->reactive()
                 ->label('Link da Vaga')
                 ->activeUrl()
                 ->required(),
+            Forms\Components\TextInput::make('company_name')
+                ->reactive()
+                ->required()
+                ->label('Nome da empresa'),
             Forms\Components\TextInput::make('salary')
+                ->reactive()
                 ->label('Faixa salarial (opcional)')
                 ->helperText('Ex.: R$ 2.000,00 - R$ 3.000,00'),
             Forms\Components\Select::make('tags')
+                ->reactive()
                 ->label('Tags')
                 ->multiple()
-                ->helperText('Selecione até 4 tags')
                 ->options(Listing::getTags()->toArray())
-                ->optionsLimit(4)
+                ->maxItems(5)
                 ->required(),
-            // ...
+            Forms\Components\FileUpload::make('company_logo')
+                ->reactive()
+                ->label('Logo da empresa')
+                ->image()
+                ->disk('public')
+                ->required()
         ];
     }
 
-    protected function onValidationError(ValidationException $exception): void
+    public function create(): void 
     {
-        Notification::make()
-            ->title($exception->getMessage())
-            ->danger()
-            ->send();
-    }
+        Listing::create($this->form->getState());
 
-    public function submit(): void
+        redirect()->route('home');
+    } 
+
+    protected function getFormModel(): string 
     {
-        // ...
+        return Listing::class;
     }
 
     public function render()

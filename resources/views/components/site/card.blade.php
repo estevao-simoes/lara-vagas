@@ -1,18 +1,22 @@
+@props(['loop', 'job'])
+
 <div
     class="max-w-full md:max-w-4xl px-3 mx-auto {{ !$loop->first ? 'mt-6' : '' }} border border-gray-500 border-opacity-30 shadow hover:cursor-pointer hover:shadow-lg hover:border-prussian-blue">
     <div class="flex flex-col justify-center md:flex-row w-full h-60 md:h-36 p-3">
         <div class="flex flex-row items-center justify-self-start w-full md:w-1/2">
-            <img src="https://logodownload.org/wp-content/uploads/2017/09/bayer-logo-8.png"
-                class="w-16 h-16 rounded-full border object-cover p-1 shadow-sm" alt="Bayer">
+            <img src="{{ $job->companyLogoUrl }}"
+                class="w-16 h-16 rounded-full border object-contain p-1 shadow-sm" 
+                alt="{{ $job->company_name }}"
+            >
             <div class="flex flex-col ml-3">
                 <div class="text-xs">
-                    Cloudmazing B.V.
+                    {{ $job->company_name }}
                 </div>
                 <div class="font-extrabold">
-                    FULL STACK DEVELOPER
+                    {{ $job->title }}
                 </div>
                 <div class="text-sm">
-                    Full Time - <span class="">R$ 10.000,00</span>
+                    {{ $job::CONTRACT_TYPES[$job->contract_type] }} {{ $job->salary ? ' - ' . $job->salary : '' }}
                 </div>
             </div>
         </div>
@@ -41,10 +45,10 @@
                     </span>
                 </div>
                 <div>
-                    @foreach (\App\Models\Jobs\Listing::getTags()->random(5) as $tag)
+                    @foreach ($job->tags as $tag)
                         <span
                             class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mt-2">
-                            {{ $tag }}
+                            {{ $job::getTag($tag) }}
                         </span>
                     @endforeach
                 </div>
