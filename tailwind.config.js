@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 
-import colors from 'tailwindcss/colors' 
-import forms from '@tailwindcss/forms'
-import typography from '@tailwindcss/typography' 
+import colors from 'tailwindcss/colors';
+import forms from '@tailwindcss/forms';
+import typography from '@tailwindcss/typography';
 
 export default {
     content: [
