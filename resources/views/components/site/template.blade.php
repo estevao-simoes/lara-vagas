@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noindex">
+    <meta name="description" content="Vagas para Laravel específica para o mercado Brasileiro. Unindo os melhores profissionais com as melhores melhores empresas.">
 
     <title>
-        Laravags
+        Laravags - Vagas para Laravel no 🇧🇷
     </title>
 
     <!-- Fonts -->
