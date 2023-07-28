@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('contract_type');
             $table->string('url');
             $table->string('company_name');
-            $table->string('salary');
+            $table->string('salary')->nullable();
             $table->json('tags');
             $table->string('company_logo');
             $table->string('status')->default('pending');
