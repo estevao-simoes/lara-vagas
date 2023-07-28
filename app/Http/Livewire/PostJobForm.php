@@ -93,9 +93,9 @@ class PostJobForm extends Component implements Forms\Contracts\HasForms
 
     public function create(): void 
     {
-        Listing::create($this->form->getState());
+        $listing = Listing::create($this->form->getState());
 
-        redirect()->route('home');
+        redirect()->route('charge-checkout', $listing->id);
     } 
 
     protected function getFormModel(): string 

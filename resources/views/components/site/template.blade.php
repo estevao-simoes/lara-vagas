@@ -30,8 +30,6 @@
         <x-site.footer />
     </main>
 
-    
-
     @livewire('notifications')
 </body>
 

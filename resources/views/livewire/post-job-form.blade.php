@@ -7,8 +7,8 @@
         {{ $this->form }}
     </div>
 
-    <button type="submit" class="rounded-md text-center w-full h-12 px-2 text-xs md:w-32 md:px-4 md:text-base font-bold leading-3 text-white transition duration-150 ease-in-out bg-gray-800 border border-transparent hover:bg-gray-700 focus:outline-none active:bg-gray-700">
-        Salvar
+    <button type="submit" class="rounded-md text-center w-full h-12 px-2 text-xs md:px-4 md:text-base font-bold leading-3 text-white transition duration-150 ease-in-out bg-gray-800 border border-transparent hover:bg-gray-700 focus:outline-none active:bg-gray-700">
+        Pagar R$10,00 e publicar
     </button>
 
     <p class="text-2xl font-extrabold my-11">
