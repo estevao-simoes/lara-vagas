@@ -21,7 +21,17 @@
 </head>
 
 <body class="antialiased">
-    {{ $slot }}
+    <x-site.nav>
+        {{ $hero ?? '' }}
+    </x-site.nav>
+
+    <main class="container mx-auto px-3 min-h-screen relative pb-32">
+        {{ $slot }}
+        <x-site.footer />
+    </main>
+
+    
+
     @livewire('notifications')
 </body>
 

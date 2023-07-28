@@ -1,13 +1,15 @@
 <x-site.template>
-    <x-site.nav>
+    
+    <x-slot:hero>
         <x-site.hero />
-    </x-site.nav>
-    <main class="mt-16 container mx-auto px-3">
+    </x-slot>
+
+    <div class="mt-16">
         @foreach ($listings as $job)
-        <a href="{{ route('post-job.click', $job->id) }}" target="_blank">
-            <x-site.card :loop="$loop" :job="$job" />
-        </a>
+            <a href="{{ route('post-job.click', $job->id) }}" target="_blank">
+                <x-site.card :loop="$loop" :job="$job" />
+            </a>
         @endforeach
-    </main>
-    <x-site.footer />
+    </div>
+
 </x-site.template>

@@ -1,4 +1,4 @@
-<form wire:submit.prevent="create">
+<form wire:submit.prevent="create" class="mt-16">
     <p class="text-2xl font-extrabold mb-11">
         Dados da vaga
     </p>

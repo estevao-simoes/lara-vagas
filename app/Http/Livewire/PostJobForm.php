@@ -85,6 +85,7 @@ class PostJobForm extends Component implements Forms\Contracts\HasForms
                 ->reactive()
                 ->label('Logo da empresa')
                 ->image()
+                ->disablePreview()
                 ->disk('public')
                 ->required()
         ];
