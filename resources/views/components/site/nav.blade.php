@@ -25,7 +25,7 @@
                                 </a>
                             @endauth
                             @guest
-                                <a href="{{ route('auth.login') }}"
+                                <a href="{{ route('login') }}"
                                     class="w-full py-5 mr-0 text-center text-gray-200 md:py-3 md:w-auto hover:text-white md:pl-0 md:mr-3 lg:mr-5">
                                     Login
                                 </a>

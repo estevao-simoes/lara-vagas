@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', HomeController::class)->name('home');
+Route::get('/test', fn () => view('auth.page'));
 
 Route::get('listing/{listing}', GoToListingWebsiteController::class)->name('post-job.click');
 
