@@ -12,7 +12,10 @@ class HomeController extends Controller
     public function __invoke(Request $request)
     {
         return view('home', [
-            'listings' => \App\Models\Jobs\Listing::orderBy('created_at', 'desc')->get(),
+            'listings' => \App\Models\Jobs\Listing::query()
+                ->orderBy('created_at', 'desc')
+                ->where('status', 'paid')
+                ->get(),
         ]);
     }
 }
