@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
     })->name('post-job.view');
 
     Route::get('/charge-checkout/{listing}', function (Listing $listing, Request $request) {
-        return $request->user()->checkout(['price_1NYutUKCVKM4D3MpXAAJLSxy' => 1], [
+        return $request->user()->checkout(['price_1NYvphKCVKM4D3Mp08Bhuxcg' => 1], [
             'success_url' => route('checkout-success').'?session_id={CHECKOUT_SESSION_ID}&listing_id=' . $listing->id,
             'cancel_url' => route('dashboard'),
         ]);
