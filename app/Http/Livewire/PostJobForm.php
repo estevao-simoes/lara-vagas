@@ -41,6 +41,7 @@ class PostJobForm extends Component implements Forms\Contracts\HasForms
         return [
             Forms\Components\TextInput::make('title')
                 ->label('Título do cargo')
+                ->autofocus()
                 ->reactive()
                 ->required(),
             Forms\Components\TextInput::make('location')

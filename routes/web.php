@@ -29,7 +29,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     
-    Route::get('post-job', function () {
+    Route::get('/dashboard/post-job', function () {
         return view('post-job');
     })->name('post-job.view');
 

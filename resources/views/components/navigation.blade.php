@@ -8,6 +8,9 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ 'Minhas vagas' }}
                     </x-nav-link>
+                    <x-nav-link class="ml-4" :href="route('post-job.view')" :active="request()->routeIs('post-job.view')">
+                        {{ 'Postar Vaga' }}
+                    </x-nav-link>
                     <x-nav-link class="ml-4" :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
                         {{ __('Profile') }}
                     </x-nav-link>

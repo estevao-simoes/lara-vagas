@@ -1,8 +1,4 @@
-<form wire:submit.prevent="create" class="mt-16">
-    <p class="text-2xl font-extrabold mb-11">
-        Dados da vaga
-    </p>
-
+<form wire:submit.prevent="create" class="mt-12 p-4 sm:p-8 bg-white shadow sm:rounded-lg">
     <div class="mb-10">
         {{ $this->form }}
     </div>
