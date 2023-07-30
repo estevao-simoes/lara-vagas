@@ -93,17 +93,17 @@ class PostJobForm extends Component implements Forms\Contracts\HasForms
         ];
     }
 
-    public function create(): void
+    public function create()
     {
         $listing = Listing::create(array_merge($this->form->getState(), [
             'user_id' => auth()->id(),
         ]));
 
         if (App::environment('production')) {
-            redirect()->route('charge-checkout', $listing->id);
+            return redirect()->route('charge-checkout', $listing->id);
         }
 
-        redirect()->route('dashboard')->with('success', 'Anúncio criado com sucesso!');
+        return redirect()->route('dashboard')->with('success', 'Anúncio criado com sucesso!');
     }
 
     protected function getFormModel(): string
