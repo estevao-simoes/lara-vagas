@@ -48,7 +48,10 @@ Route::middleware('auth')->group(function () {
         $checkoutSession = $request->user()->stripe()->checkout->sessions->retrieve($request->get('session_id'));
         $listing = Listing::find($request->get('listing_id'));
 
-        $listing->update(['status' => $checkoutSession->payment_status]);
+        $listing->update([
+            'status' => $checkoutSession->payment_status,
+            'posted_at' => now(),
+        ]);
 
         return redirect()->route('dashboard')->with('success', 'Pagamento aprovado. Seu anúncio será publicado!');
     })->name('checkout-success');
