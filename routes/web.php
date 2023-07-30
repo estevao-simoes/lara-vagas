@@ -28,14 +28,18 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    
+
     Route::get('/dashboard/post-job', function () {
         return view('post-job');
     })->name('post-job.view');
 
     Route::get('/charge-checkout/{listing}', function (Listing $listing, Request $request) {
-        return $request->user()->checkout(['price_1NYvphKCVKM4D3Mp08Bhuxcg' => 1], [
-            'success_url' => route('checkout-success').'?session_id={CHECKOUT_SESSION_ID}&listing_id=' . $listing->id,
+
+        // Production
+        // return $request->user()->checkout(['price_1NYvphKCVKM4D3Mp08Bhuxcg' => 1], [
+
+        return $request->user()->checkout(['price_1NYutUKCVKM4D3MpXAAJLSxy' => 1], [
+            'success_url' => route('checkout-success') . '?session_id={CHECKOUT_SESSION_ID}&listing_id=' . $listing->id,
             'cancel_url' => route('dashboard'),
         ]);
     })->name('charge-checkout');
@@ -45,9 +49,8 @@ Route::middleware('auth')->group(function () {
         $listing = Listing::find($request->get('listing_id'));
 
         $listing->update(['status' => $checkoutSession->payment_status]);
-        
+
         return redirect()->route('dashboard')->with('success', 'Pagamento aprovado. Seu anúncio será publicado!');
-        
     })->name('checkout-success');
 
     Route::get('/dashboard/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -55,4 +58,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/dashboard/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
