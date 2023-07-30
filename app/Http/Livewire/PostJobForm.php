@@ -83,9 +83,6 @@ class PostJobForm extends Component implements Forms\Contracts\HasForms
                 ->options(Listing::getTags()->toArray())
                 ->maxItems(5)
                 ->required(),
-            Forms\Components\TextInput::make('clicks_count')
-                ->counts('clicks')
-                ->label('Cliques'),
             Forms\Components\FileUpload::make('company_logo')
                 ->reactive()
                 ->label('Logo da empresa')

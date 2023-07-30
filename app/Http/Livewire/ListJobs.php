@@ -33,9 +33,9 @@ class ListJobs extends Component implements Tables\Contracts\HasTable
             Tables\Columns\TextColumn::make('created_at')
                 ->label('Data de criação')
                 ->date('d/m/Y'),
-            // Tables\Columns\TextColumn::make('clicks_count')
-            //     ->label('Cliques')
-            //     ->counts('clicks'),
+            Tables\Columns\TextColumn::make('clicks_count')
+                ->label('Cliques')
+                ->counts('clicks'),
             Tables\Columns\BadgeColumn::make('status')
                 ->label('Status')
                 ->enum([
