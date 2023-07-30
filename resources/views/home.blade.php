@@ -5,10 +5,8 @@
     </x-slot>
 
     <div class="mt-16">
-        @foreach ($listings as $job)
-            <a href="{{ route('post-job.click', $job->id) }}" target="_blank">
-                <x-site.card :loop="$loop" :job="$job" />
-            </a>
+        @foreach ($listings as $job)            
+            <x-site.card :loop="$loop" :job="$job" />
         @endforeach
     </div>
 
