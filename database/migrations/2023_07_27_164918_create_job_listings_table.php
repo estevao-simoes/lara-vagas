@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('job_listings', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
+            $table->foreignIdFor(\App\Models\User::class)
+                ->constrained()
+                ->cascadeOnDelete();
+
             $table->string('title');
             $table->string('location');
             $table->string('contract_type');
@@ -25,7 +29,7 @@ return new class extends Migration
             $table->string('status')->default('pending');
 
             $table->timestamp('posted_at')->nullable();
-             
+
             $table->timestamps();
         });
     }

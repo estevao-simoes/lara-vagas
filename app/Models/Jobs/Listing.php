@@ -2,6 +2,7 @@
 
 namespace App\Models\Jobs;
 
+use App\Models\User;
 use App\Traits\HasTags;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -26,6 +27,7 @@ class Listing extends Model
 
     protected $fillable = [
         'title',
+        'user_id',
         'location',
         'contract_type',
         'url',
@@ -53,6 +55,11 @@ class Listing extends Model
     public function clicks()
     {
         return $this->hasMany(Click::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     /**

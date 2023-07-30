@@ -25,7 +25,19 @@
         {{ $hero ?? '' }}
     </x-site.nav>
 
-    <main class="container mx-auto px-3 min-h-screen relative pb-32">
+    @if (request()->is('dashboard*'))
+        <x-navigation/>
+    @endif
+
+    <main class="container mx-auto px-3 min-h-[80vh] relative pb-32">
+        @isset($header)
+            <div class="max-w-7xl mx-auto px-3 sm:hidden sm:px-6 lg:px-8 mt-10">
+                <h2 class="font-bold text-2xl text-prussian-blue leading-tight">
+                    {{ $header }}
+                </h2>
+            </div>
+        @endisset
+
         {{ $slot }}
         <x-site.footer />
     </main>

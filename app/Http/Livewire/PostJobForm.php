@@ -6,6 +6,7 @@ use App\Models\Jobs\Listing;
 use Livewire\Component;
 use Filament\Forms;
 use Filament\Notifications\Notification;
+use Illuminate\Support\Facades\App;
 use Illuminate\Validation\ValidationException;
 
 class PostJobForm extends Component implements Forms\Contracts\HasForms
@@ -91,14 +92,20 @@ class PostJobForm extends Component implements Forms\Contracts\HasForms
         ];
     }
 
-    public function create(): void 
+    public function create(): void
     {
-        $listing = Listing::create($this->form->getState());
+        $listing = Listing::create(array_merge($this->form->getState(), [
+            'user_id' => auth()->id(),
+        ]));
 
-        redirect()->route('charge-checkout', $listing->id);
-    } 
+        if (App::environment('production')) {
+            redirect()->route('charge-checkout', $listing->id);
+        }
 
-    protected function getFormModel(): string 
+        redirect()->route('dashboard')->with('success', 'Anúncio criado com sucesso!');
+    }
+
+    protected function getFormModel(): string
     {
         return Listing::class;
     }
