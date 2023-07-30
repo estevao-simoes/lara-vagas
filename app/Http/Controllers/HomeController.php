@@ -13,7 +13,7 @@ class HomeController extends Controller
     {
         return view('home', [
             'listings' => \App\Models\Jobs\Listing::query()
-                ->orderBy('created_at', 'desc')
+                ->orderBy('posted_at', 'desc')
                 ->where('status', 'paid')
                 ->get(),
         ]);

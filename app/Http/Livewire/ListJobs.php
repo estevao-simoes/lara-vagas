@@ -33,6 +33,9 @@ class ListJobs extends Component implements Tables\Contracts\HasTable
             Tables\Columns\TextColumn::make('created_at')
                 ->label('Data de criação')
                 ->date('d/m/Y'),
+            Tables\Columns\TextColumn::make('posted_at')
+                ->label('Publicado')
+                ->getStateUsing(fn (Listing $record): string => $record->posted_at ? $record->posted_at->diffForHumans() : ''),
             Tables\Columns\TextColumn::make('clicks_count')
                 ->label('Cliques')
                 ->counts('clicks'),
