@@ -7,7 +7,7 @@
     <meta name="description" content="Vagas para Laravel específicas para o mercado Brasileiro. Unindo os melhores profissionais com as melhores empresas.">
 
     <title>
-        Laravags - Vagas para Laravel no Brasil
+        Laravagas - Vagas para Laravel no Brasil
     </title>
 
     <!-- Fonts -->
