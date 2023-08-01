@@ -7,24 +7,23 @@ use App\Models\Jobs\Listing;
 use App\Models\Subscriber;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Notification;
-use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Notifications\AnonymousNotifiable;
+use Illuminate\Notifications\Notification;
 
 class JobPosted extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public Listing $listingting;
+    public Listing $listing;
     public Subscriber $subscriber;
-
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(Listing $listingting, Subscriber $subscriber)
+    public function __construct(Listing $listing, Subscriber $subscriber)
     {
-        $this->listing = $listingting;
+        $this->listing = $listing;
         $this->subscriber = $subscriber;
     }
 
@@ -59,7 +58,7 @@ class JobPosted extends Notification implements ShouldQueue
     public function toArray(object $notifiable): array
     {
         return [
-            //
+
         ];
     }
 }
