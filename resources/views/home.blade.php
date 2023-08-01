@@ -5,8 +5,8 @@
     </x-slot>
 
     <div class="mt-16">
-        @foreach ($listings as $job)            
-            <x-site.card :loop="$loop" :job="$job" />
+        @foreach ($listings as $listing)            
+            <x-site.card :loop="$loop" :listing="$listing" />
         @endforeach
     </div>
 

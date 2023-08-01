@@ -21,7 +21,7 @@ use Illuminate\Http\Request;
 Route::get('/', HomeController::class)->name('home');
 Route::get('/test', fn () => view('auth.page'));
 
-Route::get('listing/{listing}', GoToListingWebsiteController::class)->name('post-job.click');
+Route::get('listing/{listing}/{subscriber?}', GoToListingWebsiteController::class)->name('post-job.click');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -36,8 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/charge-checkout/{listing}', function (Listing $listing, Request $request) {
 
         // Test
-        // return $request->user()->checkout(['price_1NYutUKCVKM4D3MpXAAJLSxy' => 1], [
-        return $request->user()->checkout(['price_1NYvphKCVKM4D3Mp08Bhuxcg' => 1], [
+        return $request->user()->checkout(['price_1NYutUKCVKM4D3MpXAAJLSxy' => 1], [
+        // return $request->user()->checkout(['price_1NYvphKCVKM4D3Mp08Bhuxcg' => 1], [
             'success_url' => route('checkout-success') . '?session_id={CHECKOUT_SESSION_ID}&listing_id=' . $listing->id,
             'cancel_url' => route('dashboard'),
         ]);

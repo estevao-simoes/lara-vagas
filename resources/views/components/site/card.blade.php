@@ -1,23 +1,23 @@
-@props(['loop', 'job'])
+@props(['loop', 'listing'])
 
 <div
     class="max-w-full md:max-w-4xl px-3 mx-auto {{ !$loop->first ? 'mt-6' : '' }} border border-gray-500 border-opacity-30 shadow hover:cursor-pointer hover:shadow-lg hover:border-prussian-blue">
-    <a href="{{ route('post-job.click', $job->id) }}" target="_blank">
+    <a href="{{ route('post-job.click', $listing->id) }}" target="_blank">
         <div class="flex flex-col justify-center md:flex-row w-full h-60 md:h-36 p-3">
             <div class="flex flex-row items-center justify-self-start w-full md:w-1/2">
-                <img src="{{ $job->companyLogoUrl }}"
+                <img src="{{ $listing->companyLogoUrl }}"
                     class="w-16 h-16 rounded-full border object-contain p-1 shadow-sm" 
-                    alt="{{ $job->company_name }}"
+                    alt="{{ $listing->company_name }}"
                 >
                 <div class="flex flex-col ml-3">
                     <div class="text-xs">
-                        {{ $job->company_name }}
+                        {{ $listing->company_name }}
                     </div>
                     <div class="font-extrabold">
-                        {{ $job->title }}
+                        {{ $listing->title }}
                     </div>
                     <div class="text-sm">
-                        {{ $job::CONTRACT_TYPES[$job->contract_type] }} {{ $job->salary ? ' - ' . $job->salary : '' }}
+                        {{ $listing::CONTRACT_TYPES[$listing->contract_type] }} {{ $listing->salary ? ' - ' . $listing->salary : '' }}
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                         </svg>
 
                         <span class="ml-1">
-                            {{ $job->posted_at?->diffForHumans() }}
+                            {{ $listing->posted_at?->diffForHumans() }}
                         </span>
                     </div>
                     <div class="flex items-center md:justify-end">
@@ -42,14 +42,14 @@
                                 d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                         </svg>
                         <span class="ml-1">
-                            {{ $job->location }}
+                            {{ $listing->location }}
                         </span>
                     </div>
                     <div>
-                        @foreach ($job->tags as $tag)
+                        @foreach ($listing->tags as $tag)
                             <span
                                 class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mt-2">
-                                {{ $job::getTag($tag) }}
+                                {{ $listing::getTag($tag) }}
                             </span>
                         @endforeach
                     </div>

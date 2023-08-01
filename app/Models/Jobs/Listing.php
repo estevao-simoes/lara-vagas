@@ -2,6 +2,8 @@
 
 namespace App\Models\Jobs;
 
+use App\Jobs\SendPostedJobToSubscribers;
+use App\Models\Subscriber;
 use App\Models\User;
 use App\Traits\HasTags;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -36,7 +38,8 @@ class Listing extends Model
         'tags',
         'company_logo',
         'posted_at',
-        'status'
+        'status',
+        'notified_at'
     ];
 
     protected $casts = [
@@ -47,6 +50,16 @@ class Listing extends Model
     protected $appends = [
         'company_logo_url'
     ];
+
+    /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        static::updated(function (Listing $listing) {
+            $listing->sendToSubscribers();
+        });
+    }
 
     /**
      * Relationships
@@ -65,7 +78,12 @@ class Listing extends Model
     /**
      * Accessors
      */
-    
+
+    public function shouldNotifySubscribers(): bool
+    {
+        return $this->status === 'paid' && $this->notified_at === null;
+    }
+
     public function getCompanyLogoUrlAttribute()
     {
         return $this->company_logo ? asset('storage/' . $this->company_logo) : null;
@@ -75,13 +93,25 @@ class Listing extends Model
      * Functions
      */
 
-    public function addClick($request)
+    public function sendToSubscribers(): void
+    {
+        SendPostedJobToSubscribers::dispatch($this);
+    }
+
+    public function markAsNotified(): void
+    {
+        $this->update([
+            'notified_at' => now()
+        ]);
+    }
+
+    public function addClick($request, Subscriber $subscriber = null)
     {
         $this->clicks()->create([
             'ip' => $request->ip(),
             'user_agent' => $request->userAgent(),
             'referer' => $request->headers->get('referer'),
+            'subscriber_id' => $subscriber ? $subscriber->id : null
         ]);
     }
-
 }

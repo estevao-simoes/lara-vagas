@@ -93,6 +93,14 @@ class PostJobForm extends Component implements Forms\Contracts\HasForms
         ];
     }
 
+    protected function onValidationError(ValidationException $exception): void
+    {
+        Notification::make()
+            ->title($exception->getMessage())
+            ->danger()
+            ->send();
+    }
+
     public function create()
     {
         $listing = Listing::create(array_merge($this->form->getState(), [
