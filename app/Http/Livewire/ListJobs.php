@@ -2,14 +2,14 @@
 
 namespace App\Http\Livewire;
 
-use Filament\Tables;
-use Livewire\Component;
 use App\Models\Jobs\Listing;
+use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
+use Livewire\Component;
 
-class ListJobs extends Component implements Tables\Contracts\HasTable 
+class ListJobs extends Component implements Tables\Contracts\HasTable
 {
-    use Tables\Concerns\InteractsWithTable; 
+    use Tables\Concerns\InteractsWithTable;
 
     public function render()
     {
@@ -21,11 +21,11 @@ class ListJobs extends Component implements Tables\Contracts\HasTable
         return Listing::query()
             ->where('user_id', auth()->id())
             ->orderBy('created_at', 'desc');
-    } 
+    }
 
-    protected function getTableColumns(): array 
+    protected function getTableColumns(): array
     {
-        return [ 
+        return [
             Tables\Columns\TextColumn::make('title')
                 ->label('Título do cargo'),
             Tables\Columns\TextColumn::make('company_name')
@@ -51,10 +51,10 @@ class ListJobs extends Component implements Tables\Contracts\HasTable
                 ]),
         ];
     }
- 
+
     protected function getTableActions(): array
     {
-        return [ 
+        return [
             Tables\Actions\Action::make('pay')
                 ->label('Pagar')
                 ->hidden(fn (Listing $record): bool => $record->status === 'paid')
@@ -65,21 +65,21 @@ class ListJobs extends Component implements Tables\Contracts\HasTable
         ];
     }
 
-    protected function getTableEmptyStateIcon(): ?string 
+    protected function getTableEmptyStateIcon(): ?string
     {
         return 'heroicon-o-bookmark';
     }
- 
+
     protected function getTableEmptyStateHeading(): ?string
     {
         return 'Nenhuma vaga cadastrada';
     }
- 
+
     protected function getTableEmptyStateDescription(): ?string
     {
-        return 'Cadastre uma vaga para que ela apareça aqui.';  
+        return 'Cadastre uma vaga para que ela apareça aqui.';
     }
- 
+
     protected function getTableEmptyStateActions(): array
     {
         return [
@@ -89,6 +89,5 @@ class ListJobs extends Component implements Tables\Contracts\HasTable
                 ->icon('heroicon-o-plus')
                 ->button(),
         ];
-    } 
- 
+    }
 }

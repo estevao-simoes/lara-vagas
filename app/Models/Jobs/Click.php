@@ -16,6 +16,6 @@ class Click extends Model
         'ip_address',
         'user_agent',
         'referer',
-        'subscriber_id'
+        'subscriber_id',
     ];
 }

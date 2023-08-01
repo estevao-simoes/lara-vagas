@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GoToListingWebsiteController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 use App\Models\Jobs\Listing;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,14 +27,12 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-
+Route::middleware('auth')->group(function (): void {
     Route::get('/dashboard/post-job', function () {
         return view('post-job');
     })->name('post-job.view');
 
     Route::get('/charge-checkout/{listing}', function (Listing $listing, Request $request) {
-
         // Test
         // return $request->user()->checkout(['price_1NYutUKCVKM4D3MpXAAJLSxy' => 1], [
         return $request->user()->checkout(['price_1NYvphKCVKM4D3Mp08Bhuxcg' => 1], [

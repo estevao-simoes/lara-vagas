@@ -31,15 +31,14 @@ class SendPostedJobToSubscribers implements ShouldQueue
      */
     public function handle(): void
     {
-        if($this->listing->shouldNotifySubscribers()) {
+        if ($this->listing->shouldNotifySubscribers()) {
             $subscribers = Subscriber::all();
-    
+
             foreach ($subscribers as $subscriber) {
                 Mail::to($subscriber->email)->send(new JobPosted($this->listing, $subscriber));
             }
 
             $this->listing->markAsNotified();
         }
-
     }
 }

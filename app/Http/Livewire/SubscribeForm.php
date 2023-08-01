@@ -2,21 +2,20 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
 use App\Models\Subscriber;
 use Filament\Notifications\Notification;
 use Illuminate\Validation\ValidationException;
+use Livewire\Component;
 
 class SubscribeForm extends Component
 {
-
     public string $email;
 
     protected $rules = [
         'email' => 'required|email|unique:subscribers,email',
     ];
 
-    public function subscribe()
+    public function subscribe(): void
     {
         $this->validate(
             ['email' => 'required|email|unique:subscribers,email'],
@@ -40,16 +39,16 @@ class SubscribeForm extends Component
             ->send();
     }
 
+    public function render()
+    {
+        return view('livewire.subscribe-form');
+    }
+
     protected function onValidationError(ValidationException $exception): void
     {
         Notification::make()
             ->title($exception->getMessage())
             ->danger()
             ->send();
-    }
-
-    public function render()
-    {
-        return view('livewire.subscribe-form');
     }
 }

@@ -3,15 +3,11 @@
 namespace App\Filament\Resources\Jobs;
 
 use App\Filament\Resources\Jobs\ListingResource\Pages;
-use App\Filament\Resources\Jobs\ListingResource\RelationManagers;
 use App\Models\Jobs\Listing;
-use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ListingResource extends Resource
 {
@@ -23,7 +19,7 @@ class ListingResource extends Resource
     {
         return $form
             ->schema([
-                //
+
             ]);
     }
 
@@ -58,7 +54,7 @@ class ListingResource extends Resource
                     ]),
             ])
             ->filters([
-                //
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -71,7 +67,7 @@ class ListingResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+
         ];
     }
 

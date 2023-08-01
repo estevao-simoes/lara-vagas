@@ -12,7 +12,7 @@ class GoToListingWebsiteController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Listing $listing, Subscriber $subscriber = null, Request $request)
+    public function __invoke(Listing $listing, ?Subscriber $subscriber, Request $request)
     {
         try {
             $listing->addClick($request, $subscriber);
