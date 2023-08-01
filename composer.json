@@ -10,6 +10,7 @@
         "laravel/cashier": "*",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
+        "laravel/telescope": "^4.15",
         "laravel/tinker": "^2.8"
     },
     "require-dev": {
