@@ -5,18 +5,16 @@ namespace App\Models\Jobs;
 use App\Jobs\SendPostedJobToSubscribers;
 use App\Models\Subscriber;
 use App\Models\User;
-use App\Traits\HasTags;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Support\Collection;
 
 class Listing extends Model
 {
-    use HasFactory, HasTags, HasUuids;
+    use HasFactory, HasUuids;
 
-    protected $table = 'job_listings';
-
-    const CONTRACT_TYPES = [
+    public const CONTRACT_TYPES = [
         'FULL_TIME' => 'Tempo integral',
         'PART_TIME' => 'Meio período',
         'CONTRACTOR' => 'Consultor',
@@ -24,8 +22,68 @@ class Listing extends Model
         'INTERN' => 'Estagiário',
         'VOLUNTEER' => 'Voluntário',
         'PER_DIEM' => 'Por dia',
-        'OTHER' => 'Outro'
+        'OTHER' => 'Outro',
     ];
+
+    public const TAGS = [
+        'AlpineJS',
+        'Analista',
+        'Angular',
+        'API',
+        'AWS',
+        'Backend',
+        'Bootstrap',
+        'Nuvem (Cloud)',
+        'Consultor',
+        'Contrato',
+        'Craft CMS',
+        'Filamentphp',
+        'CSS',
+        'CS',
+        'Atendimento ao Cliente',
+        'Design',
+        'DevOps',
+        'Engenheiro',
+        'Frontend',
+        'Fullstack',
+        'Tempo integral',
+        'Git',
+        'Go',
+        'JavaScript',
+        'Júnior',
+        'Pleno',
+        'Senior',
+        'LAMP',
+        'Laravel',
+        'Tech Lead',
+        'Linux',
+        'Livewire',
+        'MacOS',
+        'Gerência',
+        'Microsoft',
+        'MySQL',
+        'Node.js',
+        'Produto',
+        'Open Source',
+        'Meio período',
+        'PHP',
+        'Postgres',
+        'QA',
+        'React',
+        'Redis',
+        'SaaS',
+        'SQL',
+        'Statamic',
+        'Symfony',
+        'TailwindCSS',
+        'TALL Stack',
+        'TDD',
+        'Suporte Técnico',
+        'Linux',
+        'VueJS',
+    ];
+
+    protected $table = 'job_listings';
 
     protected $fillable = [
         'title',
@@ -39,7 +97,7 @@ class Listing extends Model
         'company_logo',
         'posted_at',
         'status',
-        'notified_at'
+        'notified_at',
     ];
 
     protected $casts = [
@@ -48,7 +106,7 @@ class Listing extends Model
     ];
 
     protected $appends = [
-        'company_logo_url'
+        'company_logo_url',
     ];
 
     /**
@@ -56,7 +114,7 @@ class Listing extends Model
      */
     protected static function booted(): void
     {
-        static::updated(function (Listing $listing) {
+        static::updated(function (Listing $listing): void {
             $listing->sendToSubscribers();
         });
     }
@@ -101,17 +159,33 @@ class Listing extends Model
     public function markAsNotified(): void
     {
         $this->update([
-            'notified_at' => now()
+            'notified_at' => now(),
         ]);
     }
 
-    public function addClick($request, Subscriber $subscriber = null)
+    public function addClick($request, ?Subscriber $subscriber = null): void
     {
         $this->clicks()->create([
             'ip' => $request->ip(),
             'user_agent' => $request->userAgent(),
             'referer' => $request->headers->get('referer'),
-            'subscriber_id' => $subscriber ? $subscriber->id : null
+            'subscriber_id' => $subscriber ? $subscriber->id : null,
         ]);
     }
+
+    public static function getTags(): Collection
+    {
+        return collect(self::TAGS);
+    }
+
+    public static function getTagsAsArray(): array
+    {
+        return self::getTags()->toArray();
+    }
+
+    public static function getTag($index): string
+    {
+        return self::TAGS[$index];
+    }
+
 }
