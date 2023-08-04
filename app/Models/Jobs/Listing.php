@@ -81,6 +81,7 @@ class Listing extends Model
         'Suporte Técnico',
         'Linux',
         'VueJS',
+        'Docker'
     ];
 
     protected $table = 'job_listings';
