@@ -31,6 +31,8 @@ class ListingResource extends Resource
                     ->circular()
                     ->extraImgAttributes(['class' => 'object-contain object-center'])
                     ->label('Empresa'),
+                Tables\Columns\TextColumn::make('user.name')
+                    ->label('Usuário'),
                 Tables\Columns\TextColumn::make('title')
                     ->label('Título do cargo'),
                 Tables\Columns\TextColumn::make('created_at')
