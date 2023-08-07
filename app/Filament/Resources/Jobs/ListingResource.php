@@ -60,6 +60,11 @@ class ListingResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('publish')
+                    ->requiresConfirmation()
+                    ->label('Publicar')
+                    ->visible(fn (Listing $record) => $record->status === 'pending')
+                    ->action(fn (Listing $record) => $record->publish())
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

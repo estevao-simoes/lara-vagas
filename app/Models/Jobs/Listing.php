@@ -164,6 +164,14 @@ class Listing extends Model
         ]);
     }
 
+    public function publish(): void
+    {
+        $this->update([
+            'status' => 'paid',
+            'posted_at' => now()
+        ]);
+    }
+
     public function addClick($request, ?Subscriber $subscriber = null): void
     {
         $this->clicks()->create([

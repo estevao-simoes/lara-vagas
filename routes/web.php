@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Jobs\Listing;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,10 +46,12 @@ Route::middleware('auth')->group(function (): void {
         $checkoutSession = $request->user()->stripe()->checkout->sessions->retrieve($request->get('session_id'));
         $listing = Listing::find($request->get('listing_id'));
 
-        $listing->update([
-            'status' => $checkoutSession->payment_status,
-            'posted_at' => now(),
+        Log::info([
+            'checkoutSession' => $checkoutSession,
+            'listing' => $listing,
         ]);
+
+        $listing->publish();
 
         return redirect()->route('dashboard')->with('success', 'Pagamento aprovado. Seu anúncio será publicado!');
     })->name('checkout-success');
