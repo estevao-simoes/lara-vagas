@@ -32,6 +32,9 @@ class SubscriberResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('avatar')
+                    ->getStateUsing(fn ($record) => $record->avatarUrl)
+                    ->circular(),
                 Tables\Columns\TextColumn::make('email')
                     ->label('E-mail'),
             ])
