@@ -13,4 +13,12 @@ class Subscriber extends Model
     protected $fillable = [
         'email',
     ];
+
+
+    public function getAvatarUrlAttribute(): ?string
+    {
+        $name = md5($this->email);
+        return 'https://www.gravatar.com/avatar/' . $name;
+    }
+
 }
